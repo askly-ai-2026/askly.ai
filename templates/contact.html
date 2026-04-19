@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact – Askly AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="landing-nav">
+        <div class="logo-container">
+            <div class="ai-logo"><i class="fas fa-robot"></i></div>
+            <span class="logo-text">Askly AI</span>
+        </div>
+        <div class="nav-links">
+            <a href="{{ url_for('landing') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('help_page') }}">Help</a>
+            <a href="{{ url_for('login') }}">Login</a>
+        </div>
+    </nav>
+    <div style="padding: 40px; max-width: 800px; margin: 0 auto;">
+        <h1>Contact Us</h1>
+        <p>Email: support@asklyai.com</p>
+        <p>Follow us on social media @asklyai</p>
+    </div>
+    <script>
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.classList.add(theme);
+    </script>
+</body>
+</html>

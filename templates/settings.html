@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings – Askly AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="settings-page">
+    <div class="settings-container">
+        <!-- Header -->
+        <div class="settings-header">
+            <a href="{{ url_for('chat') }}" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Chat
+            </a>
+            <h1>Settings</h1>
+        </div>
+
+        <div class="settings-grid">
+            <!-- Profile Card -->
+            <div class="settings-card profile-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>Profile</h3>
+                    <p class="card-subtitle">Manage your public information</p>
+                </div>
+                <div class="card-body">
+                    <div class="profile-section">
+                        <div class="profile-avatar">
+                            <img src="{{ url_for('static', filename='uploads/' + settings.profile_photo) }}" alt="Profile" id="profile-preview">
+                            <div class="avatar-overlay">
+                                <label for="photo-input" class="avatar-upload-btn">
+                                    <i class="fas fa-camera"></i>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="profile-info">
+                            <h4>{{ username }}</h4>
+                            <p class="profile-email">{{ email }}</p>
+                            <div class="profile-actions">
+    <label for="photo-input" class="btn btn-outline">
+        <i class="fas fa-cloud-upload-alt"></i> Change Photo
+    </label>
+    <input type="file" id="photo-input" name="photo" accept="image/*" hidden>
+    <button id="reset-photo-btn" class="btn btn-ghost">
+        <i class="fas fa-undo-alt"></i> Reset to Default
+    </button>
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appearance Card -->
+            <div class="settings-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Appearance</h3>
+                    <p class="card-subtitle">Customize your interface theme</p>
+                </div>
+                <div class="card-body">
+                    <div class="theme-selector">
+                        <div class="theme-options">
+                            <button class="theme-option light-option" data-theme="light">
+                                <i class="fas fa-sun"></i>
+                                <span>Light</span>
+                            </button>
+                            <button class="theme-option dark-option" data-theme="dark">
+                                <i class="fas fa-moon"></i>
+                                <span>Dark</span>
+                            </button>
+                        </div>
+                        <p class="theme-hint">Choose your preferred color scheme</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Card - Redesigned -->
+            <div class="settings-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Account</h3>
+                    <p class="card-subtitle">Manage your account settings and security</p>
+                </div>
+                <div class="card-body">
+                    <!-- Modern info display -->
+                    <div class="account-info-modern">
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="info-content">
+                                <span class="info-label">Username</span>
+                                <span class="info-value">{{ username }}</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="info-content">
+                                <span class="info-label">Email address</span>
+                                <span class="info-value" id="user-email">{{ email }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action buttons - modern style -->
+                    <div class="account-actions-modern">
+                        <button id="update-email-btn" class="btn btn-modern btn-primary-modern">
+                            <i class="fas fa-pen"></i> Update Email
+                        </button>
+                        <button id="logout-btn" class="btn btn-modern btn-secondary-modern">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="danger-zone">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Danger Zone</h4>
+                        <button id="delete-account-btn" class="btn btn-modern btn-danger-modern">
+                            <i class="fas fa-user-slash"></i> Delete Account
+                        </button>
+                        <p class="warning-text">This action is permanent and cannot be undone. Your email will receive an OTP for confirmation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Management Card -->
+            <div class="settings-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Data Management</h3>
+                    <p class="card-subtitle">Control your chat history and data</p>
+                </div>
+                <div class="card-body">
+                    <button id="clear-all-data" class="btn btn-modern btn-danger-modern">
+                        <i class="fas fa-eraser"></i> Clear All Chat History
+                    </button>
+                    <p class="warning-text">This will permanently delete all your conversations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal (unchanged) -->
+    <div id="cyber-modal" class="cyber-modal" style="display: none;">
+        <div class="cyber-modal__card">
+            <div class="cyber-modal__header">
+                <h3 id="modal-title">Confirm</h3>
+                <button class="cyber-modal__close" id="modal-close">&times;</button>
+            </div>
+            <div class="cyber-modal__body">
+                <p id="modal-message"></p>
+                <div id="modal-inputs"></div>
+            </div>
+            <div class="cyber-modal__footer">
+                <button id="modal-cancel" class="btn btn-outline">Cancel</button>
+                <button id="modal-confirm" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.classList.add(savedTheme);
+            document.querySelectorAll('.theme-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.theme === savedTheme);
+            });
+        })();
+    </script>
+</body>
+</html>

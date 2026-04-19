@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Askly AI – Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Modern Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <div class="ai-logo"><i class="fas fa-robot"></i></div>
+                    <span class="logo-text">Askly AI</span>
+                </div>
+                <button id="new-chat-btn" class="btn btn-modern btn-primary-modern btn-new-chat">
+                    <i class="fas fa-plus"></i> New Chat
+                </button>
+            </div>
+            <div class="chat-history">
+                <div class="history-header">
+                    <span>Recent Chats</span>
+                    <button id="clear-history-btn" class="icon-btn-modern" title="Clear all history">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+                <ul id="session-list" class="session-list">
+                    {% for session in sessions %}
+                    <li class="session-item" data-session-id="{{ session.id }}" style="--index: {{ loop.index0 }};">
+                        <div class="session-title-wrapper">
+                            <span class="session-title">{{ session.title }}</span>
+                            <button class="rename-session-btn" data-session-id="{{ session.id }}" title="Rename">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                        </div>
+                        <button class="delete-session-btn" data-session-id="{{ session.id }}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="sidebar-footer">
+                <a href="{{ url_for('settings_page') }}" class="settings-link-modern">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <div class="user-profile-mini-modern">
+                    <img src="{{ url_for('static', filename='uploads/' + profile_photo) }}" alt="Profile" class="profile-thumb-modern">
+                    <span class="username-text">{{ username }}</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-main">
+            <div class="chat-header-modern">
+                <div class="chat-header-left">
+                    <button id="toggle-sidebar-btn" class="icon-btn-modern sidebar-toggle">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="session-info">
+                        <h2 id="current-session-title">New Chat</h2>
+                        <span class="model-badge">Llama 3.3 70B</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="chat-container" class="chat-container">
+                <!-- Empty state injected by JS -->
+            </div>
+
+            <div class="chat-input-area-modern">
+                <textarea id="user-input" placeholder="Message Askly AI..." rows="1"></textarea>
+                <button id="send-btn" class="send-btn-modern" title="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div id="cyber-modal" class="cyber-modal" style="display: none;">
+        <div class="cyber-modal__card">
+            <div class="cyber-modal__header">
+                <h3 id="modal-title">Confirm</h3>
+                <button class="cyber-modal__close" id="modal-close">&times;</button>
+            </div>
+            <div class="cyber-modal__body">
+                <p id="modal-message"></p>
+                <div id="modal-inputs"></div>
+            </div>
+            <div class="cyber-modal__footer">
+                <button id="modal-cancel" class="btn btn-outline">Cancel</button>
+                <button id="modal-confirm" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Apply saved theme
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.classList.add(theme);
+    </script>
+</body>
+</html>

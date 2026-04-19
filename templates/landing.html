@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Askly AI – Your Intelligent Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Landing page specific styles */
+        body {
+            overflow-y: auto;
+            height: auto;
+        }
+        .landing-page {
+            scroll-behavior: smooth;
+        }
+        .landing-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(var(--bg-secondary-rgb), 0.85);
+        }
+        .section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+            font-family: var(--font-mono);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero {
+            text-align: center;
+            padding: 100px 40px 80px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 20px auto;
+            opacity: 0.9;
+        }
+        .feature-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .feature-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px 25px;
+            width: 300px;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease backwards;
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+            border-color: var(--accent-cyan);
+        }
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+        }
+        .feature-card h3 {
+            margin-bottom: 12px;
+            font-family: var(--font-mono);
+        }
+        .about-section {
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            padding: 50px;
+            margin-top: 40px;
+        }
+        .footer {
+            background: var(--bg-tertiary);
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            color: var(--accent-cyan);
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        /* RGB variables for backdrop */
+        :root {
+            --bg-secondary-rgb: 255, 255, 255;
+        }
+        :root.dark {
+            --bg-secondary-rgb: 17, 17, 24;
+        }
+    </style>
+</head>
+<body class="landing-page">
+    <nav class="landing-nav">
+        <div class="logo-container">
+            <div class="ai-logo"><i class="fas fa-robot"></i></div>
+            <span class="logo-text">Askly AI</span>
+        </div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('help_page') }}">Help</a>
+            <a href="{{ url_for('login') }}" class="cyber-btn cyber-btn--outline">Login</a>
+            <a href="{{ url_for('signup') }}" class="cyber-btn cyber-btn--primary">Sign Up</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Home / Hero Section -->
+        <section id="home" class="hero">
+            <h1>Meet <span class="gradient-text">Askly AI</span></h1>
+            <p>Your personal AI assistant for smarter conversations, creative ideas, and instant answers.</p>
+            <div class="cta-buttons">
+                <a href="{{ url_for('signup') }}" class="cyber-btn cyber-btn--primary" style="padding: 14px 32px; font-size: 1.1rem;">Get Started Free →</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="section">
+            <h2 class="section-title">Why Choose <span class="gradient-text">Askly AI</span>?</h2>
+            <div class="feature-grid">
+                <div class="feature-card" style="--i:0">
+                    <i class="fas fa-comment-dots"></i>
+                    <h3>Natural Chat</h3>
+                    <p>Conversational AI that understands context and nuance, making interactions feel human.</p>
+                </div>
+                <div class="feature-card" style="--i:1">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Privacy First</h3>
+                    <p>Your data is encrypted and never shared. We prioritize your privacy and security.</p>
+                </div>
+                <div class="feature-card" style="--i:2">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Lightning Fast</h3>
+                    <p>Powered by Groq's ultra-fast inference, get responses in milliseconds.</p>
+                </div>
+                <div class="feature-card" style="--i:3">
+                    <i class="fas fa-palette"></i>
+                    <h3>Customizable</h3>
+                    <p>Switch between light and dark themes, and personalize your experience.</p>
+                </div>
+                <div class="feature-card" style="--i:4">
+                    <i class="fas fa-history"></i>
+                    <h3>Chat History</h3>
+                    <p>All your conversations are saved and organized for easy reference.</p>
+                </div>
+                <div class="feature-card" style="--i:5">
+                    <i class="fas fa-globe"></i>
+                    <h3>Accessible Anywhere</h3>
+                    <p>Use Askly AI on any device with a modern web browser.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="about-section">
+                <h2 class="section-title" style="text-align: left; margin-bottom: 20px;">About Askly AI</h2>
+                <p style="font-size: 1.2rem; line-height: 1.8;">Askly AI is a state-of-the-art conversational assistant designed to help you with research, writing, coding, brainstorming, and everyday questions. Built on cutting-edge language models and hosted on Groq's LPU inference engine, it delivers accurate, concise, and context-aware responses. Whether you're a student, professional, or just curious, Askly AI is your go-to companion for knowledge and creativity.</p>
+                <div style="margin-top: 30px;">
+                    <a href="{{ url_for('about') }}" class="cyber-btn cyber-btn--outline">Learn More →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('help_page') }}">Help</a>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('signup') }}">Sign Up</a>
+        </div>
+        <p style="color: var(--text-secondary);">&copy; 2026 Askly AI. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Apply saved theme
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.classList.add(theme);
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === "#" || href === "") return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

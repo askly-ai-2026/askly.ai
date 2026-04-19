@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard – Askly AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* Admin panel specific overrides – matches cyberpunk theme */
+        body {
+            background: var(--bg-primary);
+            overflow-y: auto;
+            height: auto;
+        }
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 28px;
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .admin-header h1 {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logout-btn {
+            background: linear-gradient(135deg, var(--accent-magenta), #a01c5a);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(214,51,132,0.4);
+        }
+        /* Stats card */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 28px 20px;
+            text-align: center;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 12px 24px rgba(13,110,253,0.1);
+        }
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--accent-cyan);
+            margin-bottom: 16px;
+        }
+        .stat-number {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        /* Chart card */
+        .chart-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .chart-card h3 {
+            font-family: var(--font-mono);
+            margin-bottom: 20px;
+            color: var(--accent-cyan);
+        }
+        /* Users table card */
+        .table-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .table-header {
+            padding: 20px 24px;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .table-header h3 {
+            font-family: var(--font-mono);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .users-table th {
+            text-align: left;
+            padding: 16px 20px;
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .users-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        .users-table tr:last-child td {
+            border-bottom: none;
+        }
+        .users-table tr:hover {
+            background: var(--bg-tertiary);
+        }
+        .empty-table {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+        @media (max-width: 768px) {
+            .admin-container { padding: 20px; }
+            .users-table th, .users-table td { padding: 10px 12px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="admin-container">
+    <div class="admin-header">
+        <h1><i class="fas fa-shield-alt"></i> Admin Dashboard</h1>
+        <a href="{{ url_for('admin_logout') }}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-users"></i></div>
+            <div class="stat-number">{{ total_users }}</div>
+            <div class="stat-label">Total Registered Users</div>
+        </div>
+        <!-- You can add more stats here later -->
+    </div>
+
+    <!-- Chart Card -->
+    <div class="chart-card">
+        <h3><i class="fas fa-chart-line"></i> User Registrations (Last 7 Days)</h3>
+        <canvas id="userChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- Users Table Card -->
+    <div class="table-card">
+        <div class="table-header">
+            <h3><i class="fas fa-list"></i> All Users</h3>
+        </div>
+        {% if users %}
+        <table class="users-table">
+            <thead>
+                <tr><th>Username</th><th>Email Address</th><th>Account Created (Date & Time)</th></tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td><i class="fas fa-user-circle" style="color: var(--accent-cyan); margin-right: 8px;"></i> {{ user.username }}</td>
+                    <td><i class="fas fa-envelope" style="color: var(--accent-magenta); margin-right: 8px;"></i> {{ user.email }}</td>
+                    <td><i class="fas fa-calendar-alt" style="color: var(--accent-green); margin-right: 8px;"></i> {{ user.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-table">No users found.</div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    // Safely inject chart data from Flask
+    const chartLabels = JSON.parse('{{ chart_labels|tojson|safe }}');
+    const chartData = JSON.parse('{{ chart_data|tojson|safe }}');
+
+    const ctx = document.getElementById('userChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartLabels,
+            datasets: [{
+                label: 'New Users',
+                data: chartData,
+                backgroundColor: 'rgba(0, 240, 255, 0.6)',
+                borderColor: '#00f0ff',
+                borderWidth: 2,
+                borderRadius: 8,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: { labels: { color: getComputedStyle(document.documentElement).getPropertyValue('--text-primary') } }
+            },
+            scales: {
+                y: { 
+                    beginAtZero: true, 
+                    stepSize: 1,
+                    ticks: { color: getComputedStyle(document.documentElement).getPropertyValue('--text-secondary') }
+                },
+                x: {
+                    ticks: { color: getComputedStyle(document.documentElement).getPropertyValue('--text-secondary') }
+                }
+            }
+        }
+    });
+
+    // Apply saved theme
+    const theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.classList.add(theme);
+</script>
+</body>
+</html>
