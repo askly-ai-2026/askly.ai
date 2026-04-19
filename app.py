@@ -14,6 +14,9 @@ from PIL import Image
 from flask_mail import Mail, Message as MailMessage
 import bcrypt
 
+
+
+
 load_dotenv()
 
 app = Flask(__name__)
