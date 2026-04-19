@@ -116,3 +116,7 @@ python app.py
 👨‍💻 Author =>
 
 Developed by " Neel Soni " as a full-stack project to demonstrate "production-level engineering skills" in AI-powered applications.
+
+NOTE :
+=>Supporting agents while building this web application are Deepseek ai (Mostly), ChatGPT (OpenAI) (Partially used)
+=>I took help from this ai agents
