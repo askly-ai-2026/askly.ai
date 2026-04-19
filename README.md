@@ -1,95 +1,146 @@
-📌 Overview
+# 🤖 Askly AI – Intelligent Chatbot Web Application
 
-🤖 Askly AI – Intelligent Chatbot Web Application
+## 📌 Overview
 
-Askly AI is a modern, full-stack AI chatbot web application that delivers professional, 
-well-structured responses without markdown symbols. It features user authentication with OTP, 
-persistent chat sessions, light/dark theme, profile management, and an admin dashboard. 
-In addition , Askly ai is an end-to-end chatbot platform designed to simulate real-world SaaS architecture. 
-It focuses on performance, clean system design, and user experience , rather than just UI.
+**Askly AI** is a modern, full-stack AI chatbot web application that delivers professional, well-structured responses without markdown symbols. It features secure user authentication with OTP, persistent chat sessions, light/dark theme support, profile management, and an admin dashboard.
 
+In addition, Askly AI is an **end-to-end chatbot platform** designed to simulate real-world SaaS architecture. It focuses on **performance, clean system design, and user experience**, rather than just UI.
 
-🔗 Live Demo: https://askly-ai-1.onrender.com 
-🔗 Direct admin login Live Link : https://askly-ai-1.onrender.com/admin/login 
+---
 
-admin credential=>
-*username : admin 
-*password : admin123
+## 🔗 Live Links
 
+* 🌐 **Live Demo:** [https://askly-ai-1.onrender.com](https://askly-ai-1.onrender.com)
+* 🔐 **Admin Login:** [https://askly-ai-1.onrender.com/admin/login](https://askly-ai-1.onrender.com/admin/login)
 
-This project demonstrates:
+### Admin Credentials
+
+```
+username: admin  
+password: admin123
+```
+
+---
+
+## 🚀 What This Project Demonstrates
 
 ✔ Full-stack development
-✔ API design & integration (LLM)
+✔ API design & LLM integration
 ✔ Authentication & security practices
 ✔ Database modeling & persistence
-✔ Scalable deployment on cloud infrastructur
+✔ Scalable cloud deployment
 
+---
 
+## ✨ Features
 
+### 🔐 User Authentication
 
-✨ Features
+* Login / Signup with email OTP verification (1-minute expiry)
+* Forgot password with OTP verification
 
-🔐 User Authentication
-Login / Signup with email OTP verification (1-minute expiry) / Forgot password with email OTP verification (1-minute expiry)
+### 💬 Chat Interface
 
-💬 Chat Interface
-Clean, modern chat UI with message copy and speak buttons
+* Clean, modern UI
+* Copy & speech (text-to-speech) buttons
 
-🧠 AI Responses
-Powered by Groq’s Llama 3.3 70B, formatted without markdown symbols
+### 🧠 AI Responses
 
-📚 Chat History
-All conversations saved and organised into sessions (rename/delete)
+* Powered by **Groq (Llama 3.3 70B)**
+* Responses formatted without markdown symbols
 
-🎨 Theme Toggle
-Light / dark mode with persistent user preference
+### 📚 Chat History
 
-👤 Profile Management
-Upload / reset profile photo (default fallback)
+* Conversations saved as sessions
+* Rename / delete chats
 
-🛡️ Admin Panel
-View total users, user table (username, email, creation date), registration chart
+### 🎨 Theme Toggle
 
-📧 Email Integration
-OTP sending via Gmail SMTP
+* Light / Dark mode
+* Persistent user preference
 
-🗄️ PostgreSQL Database
-All data stored in Render’s managed PostgreSQL (users, OTPs, sessions, messages)
+### 👤 Profile Management
 
-📱 Responsive Design
-Works on desktop, tablet, and mobile
+* Upload / reset profile photo
+* Default fallback avatar
 
+### 🛡️ Admin Panel
 
+* Total users overview
+* User table (username, email, creation date)
+* Registration analytics chart
 
+### 📧 Email Integration
 
+* OTP sending via Gmail SMTP
 
-🛠️ Tools & Technologies
+### 🗄️ Database
 
-💻 Backend → Python 3.12, Flask
-🗄️ Database → PostgreSQL (Render), SQLAlchemy ORM
-🤖 AI / LLM → Groq Cloud (Llama 3.3 70B)
-🔐 Authentication → bcrypt (password hashing), OTP via email
-📧 Email → Flask-Mail, Gmail SMTP
-🎨 Frontend → HTML5, CSS3, JavaScript, Chart.js
-🚀 Deployment → Render (Web Service + PostgreSQL)
-📦 Version Control → Git, GitHub
+* PostgreSQL (Render managed)
+* Stores users, OTPs, sessions, messages
 
+### 📱 Responsive Design
 
+* Fully optimized for desktop, tablet, and mobile
 
+---
 
+## 🛠️ Tools & Technologies
 
-🚀 Quick Start (Local Development)
+### 💻 Backend
 
-⚙️ Prerequisites
+* Python 3.12
+* Flask
 
-🧩 Python 3.12+
-🔧 Git
-🌐 MongoDB Atlas (for OTP storage – optional)
-📧 Gmail account (for OTP emails)
+### 🗄️ Database
 
+* PostgreSQL (Render)
+* SQLAlchemy ORM
 
-🛠️ Setup
+### 🤖 AI / LLM
+
+* Groq Cloud (Llama 3.3 70B)
+
+### 🔐 Authentication
+
+* bcrypt (password hashing)
+* OTP via email
+
+### 📧 Email
+
+* Flask-Mail
+* Gmail SMTP
+
+### 🎨 Frontend
+
+* HTML5
+* CSS3
+* JavaScript
+* Chart.js
+
+### 🚀 Deployment
+
+* Render (Web Service + PostgreSQL)
+
+### 📦 Version Control
+
+* Git
+* GitHub
+
+---
+
+## 🚀 Quick Start (Local Development)
+
+### ⚙️ Prerequisites
+
+* Python 3.12+
+* Git
+* MongoDB Atlas *(optional for OTP storage)*
+* Gmail account *(for OTP emails)*
+
+---
+
+### 🛠️ Setup
 
 ```bash
 # Clone the repository
@@ -98,25 +149,38 @@ cd askly.ai
 
 # Create virtual environment
 python -m venv venv
+
+# Activate environment
 source venv/bin/activate   # Linux/Mac
 venv\Scripts\activate      # Windows
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Create .env file (see .env.example)
+# Create environment file
 cp .env.example .env
-# Edit .env with your keys
 
-# Run the app
+# Add your environment variables in .env
+
+# Run the application
 python app.py
 ```
 
 
-👨‍💻 Author =>
+---
+## 📝 Note
 
-Developed by " Neel Soni " as a full-stack project to demonstrate "production-level engineering skills" in AI-powered applications.
+This project was developed with the assistance of AI tools.
 
-NOTE :
-=>Supporting agents while building this web application are Deepseek ai (Mostly), ChatGPT (OpenAI) (Partially used)
-=>I took help from this ai agents
+- DeepSeek AI was used extensively during development
+- ChatGPT (OpenAI) was used for additional support and refinement
+
+These tools were utilized to enhance productivity, problem-solving, and overall development efficiency.
+---
+
+## 👨‍💻 Author
+
+**Neel Soni**
+
+Developed as a full-stack project to demonstrate **production-level engineering skills** in AI-powered applications.
+
