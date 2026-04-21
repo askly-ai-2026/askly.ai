@@ -10,7 +10,7 @@
 <body>
 <div class="auth-container">
     <div class="auth-card">
-        <h1>Askly AI // LOGIN</h1>
+        <h1>LOGIN</h1>
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% for category, message in messages %}
                 <div class="flash-message">{{ message }}</div>
@@ -28,7 +28,7 @@
                     <button type="button" class="toggle-password" tabindex="-1"><i class="far fa-eye"></i></button>
                 </div>
             </div>
-            <button type="submit" class="auth-btn">ACCESS GRANTED</button>
+            <button type="submit" class="auth-btn">Login</button>
         </form>
         <div class="auth-footer">
             <a href="{{ url_for('forgot_password') }}">Forgot password?</a> | 
