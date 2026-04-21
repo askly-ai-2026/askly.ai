@@ -127,45 +127,6 @@ password: admin123
 * Git
 * GitHub
 
----
-
-## 🚀 Quick Start (Local Development)
-
-### ⚙️ Prerequisites
-
-* Python 3.12+
-* Git
-* MongoDB Atlas *(optional for OTP storage)*
-* Gmail account *(for OTP emails)*
-
----
-
-### 🛠️ Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/askly-ai-2026/askly.ai.git
-cd askly.ai
-
-# Create virtual environment
-python -m venv venv
-
-# Activate environment
-source venv/bin/activate   # Linux/Mac
-venv\Scripts\activate      # Windows
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Create environment file
-cp .env.example .env
-
-# Add your environment variables in .env
-
-# Run the application
-python app.py
-```
-
 
 ---
 ## 📝 Note
